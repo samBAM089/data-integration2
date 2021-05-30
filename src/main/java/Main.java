@@ -8,20 +8,9 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
+
 
 public class Main {
 
@@ -31,6 +20,7 @@ public class Main {
         XMLParser xmlParser = new XMLParser();
         List<JobItem> jobList = xmlParser.parseXMLToJavaObjects();
 
+        //POST request to endpoint of localhost, encoding issue with "ü"
         try {
             ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
             String json = ow.writeValueAsString(jobList.get(0));
